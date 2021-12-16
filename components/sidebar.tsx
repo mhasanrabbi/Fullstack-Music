@@ -10,7 +10,6 @@ import {
   LinkBox,
   LinkOverlay,
 } from "@chakra-ui/layout";
-
 import {
   MdHome,
   MdSearch,
@@ -47,11 +46,11 @@ const musicMenu = [
   {
     name: "Favorites",
     icon: MdFavorite,
-    route: "/favorite",
+    route: "/favorites",
   },
 ];
 
-// const playlists = new Array(30).fill(1).map((_, i) => `Playlist ${i + 1}`);
+// const playlists = new Array(30).fill(1).map((_, i) => `Playlist ${i + 1}`)
 
 const Sidebar = () => {
   const { playlists } = usePlaylist();
@@ -63,7 +62,7 @@ const Sidebar = () => {
       paddingX="5px"
       color="gray"
     >
-      <Box height="100%" paddingY="20px">
+      <Box paddingY="20px" height="100%">
         <Box width="120px" marginBottom="20px" paddingX="20px">
           <NextImage src="/logo.svg" height={60} width={120} />
         </Box>
@@ -108,24 +107,8 @@ const Sidebar = () => {
           </List>
         </Box>
         <Divider color="gray.800" />
-        <Box
-          height="66%"
-          overflowY="auto"
-          paddingY="20px"
-          css={{
-            "&::-webkit-scrollbar": {
-              width: "4px",
-            },
-            "&::-webkit-scrollbar-track": {
-              width: "6px",
-            },
-            "&::-webkit-scrollbar-thumb": {
-              backgroundColor: "rgba(0, 0, 0, 0.05)",
-              borderRadius: "24px",
-            },
-          }}
-        >
-          <List spacing={2}>
+        <Box height="66%" overflowY="auto" paddingY="20px">
+          <List spaceing={2}>
             {playlists.map((playlist) => (
               <ListItem paddingX="20px" key={playlist.id}>
                 <LinkBox>
