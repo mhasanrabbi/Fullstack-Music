@@ -31,7 +31,7 @@ const Playlist = ({ playlist }) => {
       image={`https://picsum.photos/400?random=${playlist.id}`}
     >
       <div>
-        <SongTable />
+        <SongTable songs={playlist.songs} />
       </div>
     </GradientLayout>
   );
