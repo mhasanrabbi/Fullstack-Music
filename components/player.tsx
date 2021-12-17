@@ -23,7 +23,52 @@ import {
 import { useStoreActions } from "easy-peasy";
 
 const Player = () => {
-  return <Box>Player</Box>;
+  return (
+    <Box>
+      <Box>{/* <ReactHowler/> */}</Box>
+      <Center>
+        <ButtonGroup>
+          <IconButton
+            outline="none"
+            variant="link"
+            aria-label="skip"
+            fontSize="24px"
+            icon={<MdSkipPrevious />}
+          />
+          <IconButton
+            outline="none"
+            variant="link"
+            aria-label="play"
+            fontSize="40px"
+            color="white"
+            icon={<MdOutlinePlayCircleFilled />}
+          />
+          <IconButton
+            outline="none"
+            variant="link"
+            aria-label="pause"
+            fontSize="40px"
+            color="white"
+            icon={<MdOutlinePauseCircleFilled />}
+          />
+          <IconButton
+            outline="none"
+            variant="link"
+            aria-label="next"
+            fontSize="24px"
+            icon={<MdSkipNext />}
+          />
+          <IconButton
+            outline="none"
+            variant="link"
+            aria-label="repeat"
+            fontSize="24px"
+            icon={<MdOutlineRepeat />}
+          />
+        </ButtonGroup>
+      </Center>
+    </Box>
+  );
 };
 
 export default Player;
