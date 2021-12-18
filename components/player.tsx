@@ -21,6 +21,7 @@ import {
   MdOutlineRepeat,
 } from "react-icons/md";
 import { useStoreActions } from "easy-peasy";
+import { formatTime } from "../lib/formatters";
 
 const Player = ({ songs, activeSong }) => {
   const [playing, setPlaying] = useState(false);
@@ -31,6 +32,20 @@ const Player = ({ songs, activeSong }) => {
   const [shuffle, setShuffle] = useState(false);
   const [duration, setDuration] = useState(0.0);
   const soundRef = useRef(null);
+
+  useEffect(() => {
+    let timerId;
+
+    if (playing && !isSeeking) {
+      const f = () => {
+        setSeek(soundRef.current.seek());
+        timerId = requestAnimationFrame(f);
+      };
+      timerId = requestAnimationFrame(f);
+      return () => cancelAnimationFrame(timerId);
+    }
+    cancelAnimationFrame(timerId);
+  }, [playing, isSeeking]);
 
   const setPlayState = (value) => {
     setPlaying(value);
@@ -53,13 +68,14 @@ const Player = ({ songs, activeSong }) => {
   const nextSong = () => {
     setIndex((state) => {
       if (shuffle) {
-        // shuffle logic
         const next = Math.floor(Math.random() * songs.length);
+
         if (next === state) {
           return nextSong();
         }
         return next;
       }
+
       return state === songs.length - 1 ? 0 : state + 1;
     });
   };
@@ -158,14 +174,14 @@ const Player = ({ songs, activeSong }) => {
       <Box color="gray.600">
         <Flex justify="center" align="center">
           <Box width="10%">
-            <Text fontSize="xs">1:21</Text>
+            <Text fontSize="xs">{formatTime(seek)}</Text>
           </Box>
           <Box width="80%">
             <RangeSlider
-              id="player-range"
               aria-label={["min", "max"]}
               step={0.1}
               min={0}
+              id="player-range"
               max={duration ? duration.toFixed(2) : 0}
               onChange={onSeek}
               value={[seek]}
@@ -179,7 +195,7 @@ const Player = ({ songs, activeSong }) => {
             </RangeSlider>
           </Box>
           <Box width="10%" textAlign="right">
-            <Text fontSize="xs">321</Text>
+            <Text fontSize="xs">{formatTime(duration)}</Text>
           </Box>
         </Flex>
       </Box>
